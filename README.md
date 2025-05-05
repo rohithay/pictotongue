@@ -8,22 +8,6 @@ This is a complete implementation of a newspaper translator app that allows user
 
 ## Project Structure
 
-```
-newspaper_translator/
-│
-├── app/
-│   ├── __init__.py
-│   ├── main.py            # Main application file
-│   ├── ocr_engine.py      # OCR functionality
-│   ├── translator.py      # Translation functionality
-│   └── ui/
-│       ├── __init__.py
-│       ├── main_screen.py # Main UI screen
-│       └── styles.py      # UI styles
-│
-├── requirements.txt       # Dependencies
-└── README.md             # Project documentation
-```
 
 ## Setup Instructions
 
