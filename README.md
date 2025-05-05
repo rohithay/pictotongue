@@ -40,20 +40,5 @@ pip install -r requirements.txt
 
 3. Run the application:
 ```bash
-python -m app.main
+python newspaper_translator.py --lang <language-code>
 ```
-
-## Dependencies (requirements.txt)
-
-```
-Pillow==9.5.0
-pytesseract==0.3.10
-googletrans==4.0.0rc1
-kivy==2.1.0
-kivymd==1.1.1
-```
-
-Additionally, you'll need to install Tesseract OCR on your system:
-- Windows: Download the installer from https://github.com/UB-Mannheim/tesseract/wiki
-- macOS: `brew install tesseract`
-- Linux: `sudo apt install tesseract-ocr`
