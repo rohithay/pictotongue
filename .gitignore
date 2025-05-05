@@ -1,0 +1,25 @@
+# Log files
+*.log
+*.log.*
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Database files
+*.db
+
+# Configuration files
+*.cfg
+
+# Virtual environment
+venv/
+.env/
+.env.*
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp

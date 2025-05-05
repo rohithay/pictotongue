@@ -149,5 +149,5 @@ function showNotification(message, type) {
     
     setTimeout(() => {
         notification.style.display = 'none';
-    }, 5000);
+    }, 8080);
 }

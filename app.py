@@ -3,9 +3,7 @@ import os
 import sys
 from newspaper_translator import NewspaperTranslator
 
-app = Flask(__name__, 
-            static_folder='frontend',
-            template_folder='frontend')
+app = Flask(__name__)
 
 # Ensure input and output directories exist
 os.makedirs('input', exist_ok=True)
@@ -59,9 +57,13 @@ def translate():
         return jsonify({'error': str(e)}), 500
 
 # Serve static files from frontend folder
-@app.route('/frontend/<path:path>')
-def serve_static(path):
-    return send_from_directory('frontend', path)
+@app.route('/styles.css')
+def styles():
+    return send_from_directory('frontend', 'index.html')
+
+@app.route('/script.js')
+def script():
+    return send_from_directory('frontend', 'script.js')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8080)
