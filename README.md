@@ -16,6 +16,9 @@ This is a complete implementation of a translator that allows users to:
 - Format Preservation - Maintain text layout and structure when possible
 - Web Integration - Simple API for developers to integrate into their projects
 - Privacy-Focused - Process images locally with optional cloud backups
+  
+<img width="1219" alt="Screenshot 2025-05-17 at 6 59 53 PM" src="https://github.com/user-attachments/assets/e6c12573-9481-4ce8-bfd6-7f3ee209b8ce" />
+
 
 ## Setup Instructions
 
