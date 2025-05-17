@@ -1,6 +1,6 @@
 pillow>=9.0.0
 pytesseract>=0.3.8
 googletrans==4.0.0rc1
-certifi==2023.7.22
+certifi==2024.7.4
 httpx==0.23.0
 idna==3.7
