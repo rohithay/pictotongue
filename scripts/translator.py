@@ -11,11 +11,11 @@ import logging
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler("picto_tongue.log"),
-        logging.StreamHandler(sys.stdout)
-    ]
+        logging.StreamHandler(sys.stdout),
+    ],
 )
 logger = logging.getLogger(__name__)
 
@@ -48,14 +48,12 @@ class PictoTongue:
     def process_images(self):
         """Process all images in the input folder."""
         # Get all image files from the input folder
-        image_extensions = ['.jpg', '.jpeg', '.png', '.bmp', '.tiff']
+        image_extensions = [".jpg", ".jpeg", ".png", ".bmp", ".tiff"]
         image_files = [
-            f for f in os.listdir(self.input_folder)
+            f
+            for f in os.listdir(self.input_folder)
             if os.path.isfile(os.path.join(self.input_folder, f))
-            and any(
-                f.lower().endswith(ext)
-                for ext in image_extensions
-            )
+            and any(f.lower().endswith(ext) for ext in image_extensions)
         ]
 
         if not image_files:
@@ -105,8 +103,8 @@ class PictoTongue:
             image = Image.open(image_path)
 
             # Convert image to grayscale for better OCR results
-            if image.mode != 'L':
-                image = image.convert('L')
+            if image.mode != "L":
+                image = image.convert("L")
 
             # Extract text using Tesseract
             text = pytesseract.image_to_string(image)
@@ -163,13 +161,15 @@ class PictoTongue:
         base_filename = os.path.splitext(image_filename)[0]
 
         # Save original text directly in the output folder
-        original_path = os.path.join(self.output_folder, f"{base_filename}_original.txt")
-        with open(original_path, 'w', encoding='utf-8') as f:
+        original_path = os.path.join(
+            self.output_folder, f"{base_filename}_original.txt"
+        )
+        with open(original_path, "w", encoding="utf-8") as f:
             f.write(original_text)
 
         # Save translated text in the language-specific folder
         translated_path = os.path.join(lang_folder, f"{base_filename}_translated.txt")
-        with open(translated_path, 'w', encoding='utf-8') as f:
+        with open(translated_path, "w", encoding="utf-8") as f:
             f.write(translated_text)
 
         logger.info(f"Saved original text to {original_path}")
@@ -178,16 +178,30 @@ class PictoTongue:
 
 def main():
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description='Translate images to a target language')
+    parser = argparse.ArgumentParser(
+        description="Translate images to a target language"
+    )
 
     # Set input and output directories relative to the root directory
-    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # Go one level up to the root directory
-    input_dir = os.path.join(root_dir, 'input')  # Path to input folder in the root directory
-    output_dir = os.path.join(root_dir, 'output')  # Path to output folder in the root directory
+    root_dir = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..")
+    )  # Go one level up to the root directory
+    input_dir = os.path.join(
+        root_dir, "input"
+    )  # Path to input folder in the root directory
+    output_dir = os.path.join(
+        root_dir, "output"
+    )  # Path to output folder in the root directory
 
-    parser.add_argument('--input', default=input_dir, help='Input folder containing images')
-    parser.add_argument('--output', default=output_dir, help='Output folder for translated texts')
-    parser.add_argument('--lang', default='es', help='Target language code (default: Spanish "es")')
+    parser.add_argument(
+        "--input", default=input_dir, help="Input folder containing images"
+    )
+    parser.add_argument(
+        "--output", default=output_dir, help="Output folder for translated texts"
+    )
+    parser.add_argument(
+        "--lang", default="es", help='Target language code (default: Spanish "es")'
+    )
     args = parser.parse_args()
 
     logger.info("Starting PictoTongue process")
