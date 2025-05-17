@@ -6,7 +6,7 @@ import pytesseract
 from googletrans import Translator
 import time
 import logging
-from datetime import datetime
+
 
 # Set up logging
 logging.basicConfig(
@@ -18,6 +18,7 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
 
 class PictoTongue:
     def __init__(self, input_folder, output_folder, target_language="es"):
@@ -48,9 +49,14 @@ class PictoTongue:
         """Process all images in the input folder."""
         # Get all image files from the input folder
         image_extensions = ['.jpg', '.jpeg', '.png', '.bmp', '.tiff']
-        image_files = [f for f in os.listdir(self.input_folder)
-                      if os.path.isfile(os.path.join(self.input_folder, f)) and
-                      any(f.lower().endswith(ext) for ext in image_extensions)]
+        image_files = [
+            f for f in os.listdir(self.input_folder)
+            if os.path.isfile(os.path.join(self.input_folder, f))
+            and any(
+                f.lower().endswith(ext)
+                for ext in image_extensions
+            )
+        ]
 
         if not image_files:
             logger.warning(f"No image files found in {self.input_folder}")
@@ -131,7 +137,7 @@ class PictoTongue:
             # Translate text
             translation = self.translator.translate(text, dest=self.target_language)
 
-            logger.info(f"Translation completed")
+            logger.info("Translation completed")
             return translation.text
 
         except Exception as e:
@@ -169,6 +175,7 @@ class PictoTongue:
         logger.info(f"Saved original text to {original_path}")
         logger.info(f"Saved translated text to {translated_path}")
 
+
 def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Translate images to a target language')
@@ -183,7 +190,7 @@ def main():
     parser.add_argument('--lang', default='es', help='Target language code (default: Spanish "es")')
     args = parser.parse_args()
 
-    logger.info(f"Starting PictoTongue process")
+    logger.info("Starting PictoTongue process")
     logger.info(f"Input folder: {args.input}")
     logger.info(f"Output folder: {args.output}")
     logger.info(f"Target language: {args.lang}")
@@ -193,6 +200,7 @@ def main():
     translator.process_images()
 
     logger.info("Process completed")
+
 
 if __name__ == "__main__":
     main()
