@@ -1,0 +1,8 @@
+version: v1.0.0
+ignore:
+  SNYK-PYTHON-CERTIFI-3164749:
+    reason: "Not exploitable in our environment."
+    expires: "2025-12-31T23:59:59Z"
+  SNYK-PYTHON-HTTPX-2772742:
+    reason: "Not exploitable in our environment."
+    expires: "2025-12-31T23:59:59Z"

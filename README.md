@@ -1,6 +1,6 @@
 # Newspaper Translator
 
-This is a complete implementation of a newspaper translator that allows users to:
+This is a complete implementation of a translator that allows users to:
 1. Take a photo of a newspaper article
 2. Extract text using OCR
 3. Translate the text to a native language
@@ -24,5 +24,6 @@ pip install -r requirements.txt
 
 3. Run the application:
 ```bash
-python newspaper_translator.py --lang <language-code>
+cd scripts
+python translator.py --lang <language-code>
 ```

@@ -116,7 +116,7 @@ A log file (`newspaper_translator.log`) is created in the same directory as the 
 
 2. Run the script:
    ```bash
-   python newspaper_translator.py --lang fr
+   python translator.py --lang fr
    ```
 
 3. Check the `output` folder for results:
