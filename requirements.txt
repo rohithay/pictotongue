@@ -1,6 +1,13 @@
 pillow>=9.0.0
 pytesseract>=0.3.8
-googletrans==4.0.0rc1
-certifi==2023.7.22
-httpx==0.23.0
-idna==3.7
+deep-translator==1.10.1  # Replacing googletrans for better compatibility
+certifi>=2023.7.22
+httpx>=0.23.0  # Updated to a newer version
+idna>=3.4  # Compatible with the updated httpx
+Flask==2.3.3
+Werkzeug==2.3.7
+opencv-python==4.8.0.76
+numpy>=1.24.4
+python-dotenv==1.0.0
+flask-cors==4.0.0
+pyinstaller==5.13.0

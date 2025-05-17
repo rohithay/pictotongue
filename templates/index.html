@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PictoTongue</title>
+    <style>
+        :root {
+            /* Primary color palette */
+            --primary-color: #4885ed;
+            --primary-dark: #3367d6;
+            --secondary-color: #333333;
+            --text-color: #333333;
+            --light-text: #777777;
+            --background-color: #ffffff;
+            --panel-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            
+            /* Font settings */
+            --body-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+        }
+
+        /* Base styles */
+        html, body {
+            font-family: var(--body-font);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin: 28px 0 14px;
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        p {
+            margin: 0 0 20px;
+            text-align: center;
+            color: var(--light-text);
+            font-size: 14px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1140px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Main content layout */
+        .two-column-layout {
+            display: flex;
+            gap: 20px;
+        }
+
+        .left-column {
+            flex: 0 0 34%;
+            max-width: 34%;
+        }
+
+        .right-column {
+            flex: 0 0 66%;
+            max-width: 66%;
+        }
+
+        /* Form elements */
+        .search-box {
+            margin-bottom: 16px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 13px;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        /* Customize file input to match screenshot */
+        input[type="file"] {
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Hide the default file input button */
+        input[type="file"]::-webkit-file-upload-button {
+            font-size: 12px;
+            padding: 2px 8px;
+        }
+
+        .language-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            gap: 12px;
+        }
+
+        .language-option {
+            flex: 1;
+        }
+
+        .language-option label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .language-option select {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            font-size: 13px;
+        }
+
+        .process-btn {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .process-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Preview area */
+        .preview-container {
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .preview-header {
+            padding: 8px 12px;
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .preview-content {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            color: var(--light-text);
+            font-size: 13px;
+        }
+
+        /* Result areas */
+        .result-container {
+            margin-bottom: 16px;
+        }
+
+        .result-header {
+            padding: 8px 12px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .result-content {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            padding: 10px;
+        }
+
+        .result-text {
+            width: 100%;
+            height: 160px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-color);
+            background-color: var(--panel-bg);
+            resize: none;
+            box-sizing: border-box;
+            line-height: 1.4;
+            overflow-y: auto;
+        }
+
+        .result-text::placeholder {
+            color: var(--light-text);
+            font-size: 13px;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 12px;
+            color: var(--light-text);
+            font-size: 14px;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 992px) {
+            .two-column-layout {
+                flex-direction: column;
+            }
+            
+            .left-column,
+            .right-column {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .right-column {
+                margin-top: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .language-options {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PictoTongue</h1>
+        <p>Upload an image with text and convert it to your preferred language in seconds</p>
+        
+        <div class="two-column-layout">
+            <div class="left-column">
+                <form id="uploadForm">
+                    <div class="search-box">
+                        <input type="file" id="imageUpload" accept="image/*" class="search-input" required>
+                    </div>
+                    
+                    <div class="language-options">
+                        <div class="language-option">
+                            <label for="fromLanguage">Source Language:</label>
+                            <select id="fromLanguage">
+                                {% for code, name in languages.items() %}
+                                <option value="{{ code }}" {% if code == 'en' %}selected{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="language-option">
+                            <label for="toLanguage">Target Language:</label>
+                            <select id="toLanguage">
+                                {% for code, name in languages.items() %}
+                                <option value="{{ code }}" {% if code == 'es' %}selected{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="process-btn" id="processBtn">Process Image</button>
+                </form>
+                
+                <div class="preview-container">
+                    <div class="preview-header">Image Preview</div>
+                    <div id="imagePreview" class="preview-content">
+                        <p>No image selected</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="result-container">
+                    <div class="result-header">Extracted Text</div>
+                    <div class="result-content">
+                        <div id="loadingOriginal" class="loading-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                            <p class="loading-text">Extracting text...</p>
+                        </div>
+                        <div id="originalTextContainer">
+                            <textarea id="originalText" class="result-text" readonly placeholder="Original text will appear here"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-container">
+                    <div class="result-header">Translated Text</div>
+                    <div class="result-content">
+                        <div id="loadingTranslation" class="loading-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                            <p class="loading-text">Translating...</p>
+                        </div>
+                        <div id="translatedTextContainer">
+                            <textarea id="translatedText" class="result-text" readonly placeholder="Translated text will appear here"></textarea>
+                        </div>
+                        <div id="resultInfo" style="display: none; margin-top: 8px;">
+                            <small style="color: var(--light-text); font-size: 12px;">Processing time: <span id="processingTime">-</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const uploadForm = document.getElementById('uploadForm');
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            const processBtn = document.getElementById('processBtn');
+            const fromLanguage = document.getElementById('fromLanguage');
+            const toLanguage = document.getElementById('toLanguage');
+            const originalText = document.getElementById('originalText');
+            const translatedText = document.getElementById('translatedText');
+            const loadingOriginal = document.getElementById('loadingOriginal');
+            const loadingTranslation = document.getElementById('loadingTranslation');
+            const resultInfo = document.getElementById('resultInfo');
+            const processingTime = document.getElementById('processingTime');
+            const originalTextContainer = document.getElementById('originalTextContainer');
+            const translatedTextContainer = document.getElementById('translatedTextContainer');
+
+            // Handle image upload and preview
+            imageUpload.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                // Clear previous results
+                clearResults();
+                
+                // Check if the file is an image
+                if (!file.type.match('image.*')) {
+                    alert('Please select an image file.');
+                    return;
+                }
+
+                // Display image preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width:100%; max-height:150px;">`;
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // Handle form submission
+            uploadForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const file = imageUpload.files[0];
+                if (!file) {
+                    alert('Please select an image file.');
+                    return;
+                }
+
+                // Clear previous results
+                clearResults();
+                
+                // Show loading indicators
+                originalTextContainer.style.display = 'none';
+                translatedTextContainer.style.display = 'none';
+                loadingOriginal.style.display = 'flex';
+                loadingTranslation.style.display = 'flex';
+                
+                // Disable the process button
+                processBtn.disabled = true;
+                
+                // Read the file as data URL
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Send the image to the server for processing
+                    processImage(e.target.result, fromLanguage.value, toLanguage.value);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // Process the image with the API
+            function processImage(imageData, fromLang, toLang) {
+                // Prepare the request data
+                const requestData = {
+                    imageData: imageData,
+                    fromLang: fromLang,
+                    toLang: toLang
+                };
+
+                // Send the request to the server
+                fetch('/api/translate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Update the UI with the results
+                    displayResults(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while processing the image. Please try again.');
+                    
+                    // Hide loading indicators
+                    loadingOriginal.style.display = 'none';
+                    loadingTranslation.style.display = 'none';
+                    originalTextContainer.style.display = 'block';
+                    translatedTextContainer.style.display = 'block';
+                    
+                    // Re-enable the process button
+                    processBtn.disabled = false;
+                });
+            }
+
+            // Display the results in the UI
+            function displayResults(data) {
+                // Hide loading indicators
+                loadingOriginal.style.display = 'none';
+                loadingTranslation.style.display = 'none';
+                originalTextContainer.style.display = 'block';
+                translatedTextContainer.style.display = 'block';
+                
+                // Display the original and translated text
+                originalText.value = data.originalText;
+                translatedText.value = data.translatedText;
+                
+                // Display processing time
+                processingTime.textContent = data.processingTime;
+                resultInfo.style.display = 'block';
+                
+                // Re-enable the process button
+                processBtn.disabled = false;
+            }
+
+            // Clear results from previous operations
+            function clearResults() {
+                originalText.value = '';
+                translatedText.value = '';
+                resultInfo.style.display = 'none';
+                
+                // Make sure text containers are visible and loading spinners are hidden
+                originalTextContainer.style.display = 'block';
+                translatedTextContainer.style.display = 'block';
+                loadingOriginal.style.display = 'none';
+                loadingTranslation.style.display = 'none';
+                
+                processBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
