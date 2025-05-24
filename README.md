@@ -3,13 +3,13 @@ PictoTongue is a powerful image-to-text conversion tool that breaks down languag
 
 ## Features
 
-- Optical Character Recognition - Extract text from images, screenshots, and scanned documents
-- Multilingual Support - Process text in 50+ languages
-- Smart Translation - Convert extracted text to your preferred language
-- Batch Processing - Handle multiple images simultaneously
-- Format Preservation - Maintain text layout and structure when possible
-- Web Integration - Simple API for developers to integrate into their projects
-- Privacy-Focused - Process images locally with optional cloud backups
+- Optical Character Recognition: Extract text from images, screenshots, and scanned documents
+- Multilingual Support: Process text in 50+ languages
+- Smart Translation: Convert extracted text to your preferred language
+- Batch Processing: Handle multiple images simultaneously
+- Format Preservation: Maintain text layout and structure when possible
+- Web Integration: Simple API for developers to integrate into their projects
+- Privacy-Focused: Process images locally with optional cloud backups
   
 <img width="1219" alt="Screenshot 2025-05-17 at 6 59 53 PM" src="https://github.com/user-attachments/assets/e6c12573-9481-4ce8-bfd6-7f3ee209b8ce" />
 
