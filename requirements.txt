@@ -10,7 +10,7 @@ opencv-python==4.8.1.78
 numpy>=1.24.4
 python-dotenv==1.0.0
 flask-cors==6.0.0
-pyinstaller==5.13.1
+pyinstaller==6.0.0
 gunicorn==21.2.0
 redis==4.6.0
 celery==5.3.4
